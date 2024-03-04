@@ -37,22 +37,12 @@ void opcontrol() {
 
   while (true) {
 
-    // PID Tuner
-    // After you find values that you're happy with, you'll have to set them in
-    // auton.cpp
     if (!pros::competition::is_connected()) {
-      // Enable / Disable PID Tuner
-      //  When enabled:
-      //  * use A and Y to increment / decrement the constants
-      //  * use the arrow keys to navigate the constants
       if (master.get_digital_new_press(DIGITAL_X))
         chassis.pid_tuner_toggle();
-
-      // Trigger the selected autonomous routine
       if (master.get_digital_new_press(DIGITAL_B))
         autonomous();
-
-      chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
+      chassis.pid_tuner_iterate();
     }
 
     chassis.opcontrol_arcade_standard(ez::SPLIT);
