@@ -136,7 +136,6 @@ void opcontrol() {
   pros::Task intakeControlTask(intakeControl);
   pros::Task rightWingControlTask(rightWingControl);
   pros::Task leftWingControlTask(leftWingControl);
-  pros::Task hangControlTask(hangControl);
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 

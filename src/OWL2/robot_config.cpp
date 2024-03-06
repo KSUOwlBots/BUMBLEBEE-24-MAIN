@@ -9,4 +9,3 @@ pros::Motor intakeRight(2, pros::E_MOTOR_GEAR_600, true,
 pros::Motor_Group intake({intakeLeft, intakeRight});
 ez::Piston wingLeft{'A', false};
 ez::Piston wingRight{'B', false};
-ez::Piston hang{'C', false};
