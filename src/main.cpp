@@ -9,14 +9,14 @@
 ez::Drive chassis(
     // Left Chassis Ports (negative port will reverse it!)
     //   the first port is used as the sensor
-    {-16, 17, -19, 20},
+    {10, -17, 18, -16},
 
     // Right Chassis Ports (negative port will reverse it!)
     //   the first port is used as the sensor
-    {-11, 13, -14, 15},
+    {-13, 12, -15, 14},
 
     // IMU Port
-    6,
+    8,
 
     // Wheel Diameter (Remember, 4" wheels without screw holes are
     // actually 4.125!)
@@ -29,7 +29,7 @@ ez::Drive chassis(
     // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be
     // 84/36 which is 2.333 eg. if your drive is 36:60 where the 60t is powered,
     // your RATIO would be 36/60 which is 0.6
-    0.6666666667);
+    0.5635);
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -37,7 +37,8 @@ ez::Drive chassis(
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
-void initialize() {
+void initialize()
+{
   // Print our branding over your terminal :D
   ez::ez_template_print();
 
@@ -56,10 +57,7 @@ void initialize() {
   // Set the drive to your own constants from autons.cpp!
   default_constants();
 
-  // Autonomous Selector using LLEMU
-  ez::as::auton_selector.autons_add({
-      Auton("example auton description", autonomous_1),
-  });
+  
 
   // Initialize chassis and auton selector
   chassis.initialize();
@@ -72,7 +70,8 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {
+void disabled()
+{
   // . . .
 }
 
@@ -85,7 +84,8 @@ void disabled() {
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {
+void competition_initialize()
+{
   // . . .
 }
 
@@ -100,7 +100,8 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {
+void autonomous()
+{
   // Resets PID targets to 0
   chassis.pid_targets_reset();
 
@@ -113,8 +114,7 @@ void autonomous() {
   // Set motors to hold.  This helps autonomous consistency
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
-  // Calls selected auton from autonomous selector
-  ez::as::auton_selector.selected_auton_call();
+  void bumblebeeAuto();
 }
 
 /**
@@ -130,16 +130,19 @@ void autonomous() {
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-void opcontrol() {
+void opcontrol()
+{
   // tasks for opcontrol functions. These are used for toggles and other
   // functions
   pros::Task intakeControlTask(intakeControl);
   pros::Task rightWingControlTask(rightWingControl);
   pros::Task leftWingControlTask(leftWingControl);
+  pros::Task hangControlTask(hangControl);
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
-  while (true) {
+  while (true)
+  {
     chassis.opcontrol_arcade_standard(ez::SPLIT);
     // This is used for timer calculations! Keep this ez::util::DELAY_TIME
     pros::delay(ez::util::DELAY_TIME);

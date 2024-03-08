@@ -26,7 +26,8 @@ void rightWingControl() {
   }
 }
 // toggle for left wing control
-void leftWingControl() {
+void leftWingControl()
+{ 
   while (true) {
     // 1 button toggle
     wingLeft.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
@@ -35,3 +36,16 @@ void leftWingControl() {
     pros::delay(ez::util::DELAY_TIME);
   }
 }
+
+  void hangControl()
+  { 
+  while (true) 
+  {
+    // 1 button toggle
+    wingLeft.button_toggle(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP));
+    // 2 button toggle
+    // wingRight.buttons(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP), master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN));
+    pros::delay(ez::util::DELAY_TIME);
+  }
+  }
+
