@@ -52,6 +52,7 @@ void initialize()
 
   // Defaults for curve. If using tank, only the first parameter is  used.
   // (Comment this line out if you have an SD card!)
+  chassis.opcontrol_curve_buttons_toggle(false);
   chassis.opcontrol_curve_default_set(0, 0);
 
   // Set the drive to your own constants from autons.cpp!
@@ -114,7 +115,7 @@ void autonomous()
   // Set motors to hold.  This helps autonomous consistency
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
-  void bumblebeeAuto();
+  bumblebeeAuto();
 }
 
 /**
